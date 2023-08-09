@@ -27,3 +27,4 @@ const color = () => {
 sizeUpBtn.addEventListener('click', sizeUp)
 sizeDownBtn.addEventListener('click', sizeDown)
 colorBtn.addEventListener('click', color)
+
