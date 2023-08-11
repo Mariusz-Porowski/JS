@@ -1,30 +1,31 @@
-const sizeUpBtn = document.querySelector('.sizeUp')
-const sizeDownBtn = document.querySelector('.sizeDown')
-const colorBtn = document.querySelector('.color')
-const paragraph = document.querySelector('p')
+const pass = document.querySelector('#password')
+const p = document.querySelector('.passinfo')
+const letters = /[a-z]/i
+const numbers = /[0-9]/
+const special = /[!@#$%^&*()]/
+const minValue = 10
 
-let fontSize = 36
-
-const sizeUp = () => {
-	if (fontSize >= 48) return
-	fontSize += 3
-	paragraph.style.fontSize = fontSize + 'px'
-}
-const sizeDown = () => {
-	if (fontSize <= 21) return
-
-	fontSize -= 3
-	paragraph.style.fontSize = fontSize + 'px'
-}
-const color = () => {
-	const r = Math.floor(Math.random() * 255)
-	const g = Math.floor(Math.random() * 255)
-	const b = Math.floor(Math.random() * 255)
-
-	paragraph.style.color = `rgb(${r},${g},${b})`
+const showMsg = () => {
+	// console.log(pass.value.length)
+	if (pass.value.length > minValue && pass.value.match(letters) && pass.value.match(numbers) && pass.value.match(special)){
+		p.textContent = 'Masz bardzo dobre hasło! 💪'
+		p.style.color = 'lime'
+	} else if (pass.value.length > minValue && pass.value.match(letters) && pass.value.match(numbers)) {
+		p.textContent = 'Masz  dobre hasło! 🙂'
+		p.style.color = 'gold'
+	} else {
+		p.textContent = 'Masz  słabe hasło! 😔'
+		p.style.color = 'tomato'
+	}
 }
 
-sizeUpBtn.addEventListener('click', sizeUp)
-sizeDownBtn.addEventListener('click', sizeDown)
-colorBtn.addEventListener('click', color)
+const checkPass = () => {
+	if (pass.value !== '') {
+		showMsg()
+	} else {
+		p.textContent = 'Nie podałeś hasła...'
+		p.style.color = ''
+	}
+}
 
+pass.addEventListener('keyup', checkPass)
